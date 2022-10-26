@@ -9,6 +9,10 @@ public class Exercise {
     public static List<Integer> findDuplicates(List<Integer> integerList, int numberOfDuplicates) {
         // TODO: task1
 
+        if (integerList == null){
+            return Collections.emptyList();
+        }
+
         List<Integer> list = integerList.stream()
                 .filter(el -> el != null)
                 .collect(Collectors.groupingBy(Function.identity()))
@@ -18,6 +22,6 @@ public class Exercise {
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
 
-        return (list == null ? Collections.emptyList() : list);
+        return list;
     }
 }

@@ -1,6 +1,8 @@
 package com.enfint.task4;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static com.enfint.task4.CharacterType.EVEN;
 import static com.enfint.task4.CharacterType.ODD;
@@ -8,7 +10,11 @@ import static com.enfint.task4.CharacterType.ODD;
 public class EvenAndOddFinder {
 
     static Map<CharacterType, Set<String>> findFromCollection(List<Set<String>> input) {
-        // TODO: task4
+        // TODO:
+
+        if (input == null) {
+            return Collections.emptyMap();
+        }
 
         List<String> newList = new ArrayList<>();
 
@@ -30,12 +36,10 @@ public class EvenAndOddFinder {
             }
         }
 
-        Map<CharacterType, Set<String>> hi = new HashMap<>();
-        hi.put(EVEN, even);
-        hi.put(ODD, odd);
+        Map<CharacterType, Set<String>> oddAndEven = new HashMap<>();
+        oddAndEven.put(EVEN, even);
+        oddAndEven.put(ODD, odd);
 
-        System.out.println(hi);
-
-        return new HashMap<>();
+        return oddAndEven;
     }
 }
