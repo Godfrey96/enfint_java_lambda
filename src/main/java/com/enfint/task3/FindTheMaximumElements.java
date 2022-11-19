@@ -10,11 +10,11 @@ public class FindTheMaximumElements {
         // TODO: task3
 
          if (input == null) {
-         return Collections.emptyList();
+            return Collections.emptyList();
          }
 
         return input.stream()
-                .filter(el -> el != null)
+                .filter(Objects::nonNull)
                 .sorted((a, b) -> new BigDecimal(b).compareTo(new BigDecimal(a)))
                 .limit(3)
                 .map(BigDecimal::new)

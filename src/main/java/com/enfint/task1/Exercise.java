@@ -14,7 +14,7 @@ public class Exercise {
         }
 
         List<Integer> list = integerList.stream()
-                .filter(el -> el != null)
+                .filter(Objects::nonNull)
                 .collect(Collectors.groupingBy(Function.identity()))
                 .entrySet()
                 .stream()
