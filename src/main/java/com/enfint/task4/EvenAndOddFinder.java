@@ -12,33 +12,37 @@ public class EvenAndOddFinder {
     static Map<CharacterType, Set<String>> findFromCollection(List<Set<String>> input) {
         // TODO:
 
-        if (input == null) {
-            return Collections.emptyMap();
-        }
-
-        List<String> newList = new ArrayList<>();
-
-        for (Set<String> outerList : input) {
-            for (String innerList : outerList) {
-                newList.add(innerList);
-            }
-        }
-
-        Set<String> even = new HashSet<>();
-        Set<String> odd = new HashSet<>();
-
-        for (String list : newList) {
-            CharacterType characterType = list.length() % 2 == 0 ? EVEN : ODD;
-            if (characterType.equals(EVEN)) {
-                even.add(list);
-            } else {
-                odd.add(list);
-            }
-        }
-
         Map<CharacterType, Set<String>> oddAndEven = new HashMap<>();
-        oddAndEven.put(EVEN, even);
-        oddAndEven.put(ODD, odd);
+
+        Set<String> evenSet = new HashSet<>();
+        Set<String> oddSet = new HashSet<>();
+
+        if (input == null) {
+            oddAndEven.put(CharacterType.ODD, oddSet);
+            oddAndEven.put(CharacterType.EVEN, evenSet);
+        }
+        if (input != null){
+            evenSet = input.stream()
+                    .filter(Objects::nonNull)
+                    .map(ev -> ev.stream()
+                            .filter(e -> e != null && !e.isEmpty())
+                            .filter(e -> e.length() % 2 == 0)
+                            .collect(Collectors.toList()))
+                    .flatMap(Collection::stream)
+                    .collect(Collectors.toSet());
+
+           oddSet = input.stream()
+                    .filter(Objects::nonNull)
+                    .map(od -> od.stream()
+                            .filter(e -> e != null && !e.isEmpty())
+                            .filter(e -> e.length() % 2 != 0)
+                            .collect(Collectors.toList()))
+                    .flatMap(Collection::stream)
+                    .collect(Collectors.toSet());
+
+            oddAndEven.put(CharacterType.ODD, oddSet);
+            oddAndEven.put(CharacterType.EVEN, evenSet);
+        }
 
         return oddAndEven;
     }

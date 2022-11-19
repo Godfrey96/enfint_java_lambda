@@ -22,9 +22,8 @@ public class ListOperation {
         }
         String str = sb.toString();
 
-        int sum = Arrays.stream(str.split(" "))
-                .filter(el -> el != null)
-                .filter(e -> e != "")
+        int sum = Arrays.stream(str.split(" |,"))
+                .filter(Objects::nonNull)
                 .filter((s) -> s.matches("-?\\d+"))
                 .mapToInt(Integer::parseInt)
                 .sum();
